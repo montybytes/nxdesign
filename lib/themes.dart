@@ -80,7 +80,9 @@ class NxTheme {
     ),
     cardTheme: _cardDefaultTheme.copyWith(
       color: NxColors.lightThemeCard,
-      shape: RoundedRectangleBorder(borderRadius: NxMetrics.cardBorderRadius),
+      shape: const RoundedRectangleBorder(
+        borderRadius: NxMetrics.cardBorderRadius,
+      ),
     ),
     iconTheme: const IconThemeData(color: NxColors.lightThemeText),
     tooltipTheme: _defaultTooltipTheme.copyWith(
@@ -106,6 +108,9 @@ class NxTheme {
       collapsedTextColor: NxColors.lightThemeText,
       collapsedIconColor: NxColors.lightThemeText,
       collapsedBackgroundColor: NxColors.lightThemeListItem,
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: NxColors.lightThemeCard,
     ),
     dialogTheme: const DialogThemeData(
       backgroundColor: NxColors.lightThemeCard,
@@ -143,7 +148,9 @@ class NxTheme {
     ),
     cardTheme: _cardDefaultTheme.copyWith(
       color: NxColors.darkThemeCard,
-      shape: RoundedRectangleBorder(borderRadius: NxMetrics.cardBorderRadius),
+      shape: const RoundedRectangleBorder(
+        borderRadius: NxMetrics.cardBorderRadius,
+      ),
     ),
     iconTheme: const IconThemeData(color: NxColors.darkThemeText),
     tooltipTheme: _defaultTooltipTheme.copyWith(
@@ -169,6 +176,9 @@ class NxTheme {
       collapsedTextColor: NxColors.darkThemeText,
       collapsedIconColor: NxColors.darkThemeText,
       collapsedBackgroundColor: NxColors.darkThemeListItem,
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: NxColors.darkThemeCard,
     ),
     dialogTheme: const DialogThemeData(backgroundColor: NxColors.darkThemeCard),
     timePickerTheme: _timePickerDefaultTheme.copyWith(
