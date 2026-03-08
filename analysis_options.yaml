@@ -1,0 +1,50 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    flutter_style_todos: ignore
+    camel_case_types: ignore
+  plugins:
+    - custom_lint
+
+linter:
+  rules:
+    - always_declare_return_types
+    - always_put_control_body_on_new_line
+    - always_put_required_named_parameters_first
+    - avoid_catching_errors
+    - avoid_dynamic_calls
+    - avoid_field_initializers_in_const_classes
+    - avoid_slow_async_io
+    - avoid_void_async
+    - depend_on_referenced_packages
+    - do_not_use_environment
+    - flutter_style_todos
+    - leading_newlines_in_multiline_strings
+    - matching_super_parameters
+    - no_runtimeType_toString
+    - omit_obvious_local_variable_types
+    - omit_obvious_property_types
+    - only_throw_errors
+    - prefer_const_constructors
+    - prefer_constructors_over_static_methods
+    - prefer_final_in_for_each
+    - prefer_final_locals
+    - prefer_int_literals
+    - prefer_mixin
+    - prefer_null_aware_method_calls
+    - prefer_void_to_null
+    - prefer_double_quotes
+    - sort_pub_dependencies
+    - throw_in_finally
+    - unawaited_futures
+    - unnecessary_breaks
+    - unnecessary_raw_strings
+    - unnecessary_underscores
+    - use_colored_box
+    - use_decorated_box
+    - use_enums
+    - use_named_constants
+    - use_null_aware_elements
+    - use_truncating_division
+    - use_to_and_as_if_applicable

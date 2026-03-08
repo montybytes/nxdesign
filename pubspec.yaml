@@ -1,0 +1,40 @@
+name: nxdesign
+description: "A design system for Nxtended apps using Nothing's Design Language"
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.10.1
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - images/check.png
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter.otf
+    - family: LetteraMono
+      fonts:
+        - asset: fonts/LetteraMono.otf
+    - family: SpaceMono
+      fonts:
+        - asset: fonts/SpaceMono.otf
+    - family: SpaceGrotesk
+      fonts:
+        - asset: fonts/SpaceGrotesk.otf
+    - family: NDot
+      fonts:
+        - asset: fonts/NDot77.otf
+    - family: NType
+      fonts:
+        - asset: fonts/NType82.otf
