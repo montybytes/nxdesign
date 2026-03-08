@@ -1,5 +1,5 @@
 class NxFonts {
-  static const defaultFontFamily = "Inter";
+  static const fontInter = "Inter";
   static const fontNType = "NType";
   static const fontNDot = "NDot";
   static const fontLetteraMono = "LetteraMono";
