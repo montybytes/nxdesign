@@ -308,7 +308,7 @@ class NxIcon extends StatelessWidget {
   const NxIcon({
     required this.path,
     this.package = "nxdesign",
-    this.size = 28,
+    this.size = 26,
     this.selected = false,
     this.color,
     super.key,
