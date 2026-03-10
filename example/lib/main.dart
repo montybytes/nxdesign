@@ -3,11 +3,18 @@ import 'package:nxdesign/themes.dart';
 import 'package:nxdesign/widgets.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var _expanded = true;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +32,15 @@ class MyApp extends StatelessWidget {
               children: [
                 ListTile(title: Text("Sample normal list tile"), onTap: () {}),
                 ExpansionTile(
-                  initiallyExpanded: true,
+                  initiallyExpanded: _expanded,
                   title: Text("Sample expansion tile"),
+                  trailing: SizedBox(
+                    width: 48,
+                    child: NxIcon(path: _expanded ? NxIcon.up : NxIcon.down),
+                  ),
+                  onExpansionChanged: (value) {
+                    setState(() => _expanded = value);
+                  },
                   children: [
                     ListTile(
                       title: Text("Transparent tile"),

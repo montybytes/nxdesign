@@ -1,5 +1,6 @@
 import "package:flutter/material.dart"
     hide TextButton, Radio, Switch, Checkbox, Dismissible;
+import "package:flutter_svg/flutter_svg.dart";
 import "package:nxdesign/colors.dart";
 import "package:nxdesign/metrics.dart";
 
@@ -303,6 +304,92 @@ class _DismissibleState extends State<Dismissible>
   }
 }
 
+class NxIcon extends StatelessWidget {
+  const NxIcon({
+    required this.path,
+    this.package = "nxdesign",
+    this.size = 28,
+    this.selected = false,
+    this.color,
+    super.key,
+  });
+
+  final String path;
+  final String package;
+  final double size;
+  final Color? color;
+  final bool selected;
+
+  static const add = "icons/add.svg";
+  static const alarm = "icons/alarm.svg";
+  static const apps = "icons/apps.svg";
+  static const back = "icons/back.svg";
+  static const block = "icons/block.svg";
+  static const call = "icons/call.svg";
+  static const check = "icons/check.svg";
+  static const close = "icons/close.svg";
+  static const compress = "icons/compress.svg";
+  static const delete = "icons/delete.svg";
+  static const deleteSwipe = "icons/delete_swipe.svg";
+  static const document = "icons/document.svg";
+  static const download = "icons/download.svg";
+  static const down = "icons/down.svg";
+  static const folder = "icons/folder.svg";
+  static const globe = "icons/globe.svg";
+  static const gridview = "icons/gridview.svg";
+  static const home = "icons/home.svg";
+  static const hourglass = "icons/hourglass.svg";
+  static const image = "icons/image.svg";
+  static const inbox = "icons/inbox.svg";
+  static const info = "icons/info.svg";
+  static const leftPanelClose = "icons/left_panel_close.svg";
+  static const leftPanelOpen = "icons/left_panel_open.svg";
+  static const listview = "icons/listview.svg";
+  static const lockClose = "icons/lock_close.svg";
+  static const lockOpen = "icons/lock_open.svg";
+  static const more = "icons/more.svg";
+  static const movie = "icons/movie.svg";
+  static const notifications = "icons/notifications.svg";
+  static const notification = "icons/notification.svg";
+  static const pause = "icons/pause.svg";
+  static const person = "icons/person.svg";
+  static const play = "icons/play.svg";
+  static const rename = "icons/rename.svg";
+  static const reset = "icons/reset.svg";
+  static const search = "icons/search.svg";
+  static const settings = "icons/settings.svg";
+  static const share = "icons/share.svg";
+  static const soundOff = "icons/sound_off.svg";
+  static const soundOn = "icons/sound_on.svg";
+  static const starred = "icons/starred.svg";
+  static const star = "icons/star.svg";
+  static const timer = "icons/timer.svg";
+  static const unarchive = "icons/unarchive.svg";
+  static const up = "icons/up.svg";
+  static const vibrate = "icons/vibrate.svg";
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final unselectedColor = isDark
+        ? NxColors.darkThemeText
+        : NxColors.lightThemeText;
+
+    return SizedBox.square(
+      dimension: size,
+      child: SvgPicture.asset(
+        path,
+        package: package,
+        fit: BoxFit.contain,
+        colorFilter: ColorFilter.mode(
+          selected ? NxColors.nothingRed : color ?? unselectedColor,
+          BlendMode.srcIn,
+        ),
+      ),
+    );
+  }
+}
+
 class Checkbox extends StatelessWidget {
   const Checkbox({required this.value, this.onChanged, super.key});
 
@@ -335,10 +422,9 @@ class Checkbox extends StatelessWidget {
                 child: AnimatedOpacity(
                   duration: duration,
                   opacity: value ? 1.0 : 0.0,
-                  child: Image.asset(
-                    "images/check.png",
-                    package: "nxdesign",
-                    width: 12,
+                  child: const NxIcon(
+                    path: "icons/checkbox_check.svg",
+                    color: NxColors.darkThemeCard,
                   ),
                 ),
               ),
@@ -377,7 +463,7 @@ class Switch extends StatelessWidget {
       height: height,
       width: width,
       child: InkWell(
-        customBorder: CircleBorder(),
+        customBorder: const CircleBorder(),
         onTap: () => onChanged?.call(!value),
         child: Center(
           child: AnimatedContainer(
