@@ -554,8 +554,8 @@ class Radio extends StatelessWidget {
   }
 }
 
-class MultiValueTile<T> extends StatelessWidget {
-  const MultiValueTile({
+class MultiSetting<T> extends StatelessWidget {
+  const MultiSetting({
     required this.selected,
     required this.selectables,
     this.onSelectionChanged,
@@ -563,7 +563,7 @@ class MultiValueTile<T> extends StatelessWidget {
   });
 
   final T selected;
-  final List<MultiSetting<T>> selectables;
+  final List<MultiSettingData<T>> selectables;
   final Function(T selection)? onSelectionChanged;
 
   @override
@@ -629,10 +629,10 @@ class MultiValueTile<T> extends StatelessWidget {
   }
 }
 
-class MultiSetting<T> {
+class MultiSettingData<T> {
   final String label;
   final Widget? icon;
   final T data;
 
-  const MultiSetting({required this.label, required this.data, this.icon});
+  const MultiSettingData({required this.label, required this.data, this.icon});
 }
