@@ -367,6 +367,9 @@ class NxIcon extends StatelessWidget {
   static const unarchive = "icons/unarchive.svg";
   static const up = "icons/up.svg";
   static const vibrate = "icons/vibrate.svg";
+  static const history = "icons/history.svg";
+  static const backspace = "icons/backspace.svg";
+  static const function = "icons/function.svg";
 
   @override
   Widget build(BuildContext context) {
