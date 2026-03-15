@@ -2,6 +2,7 @@ import "dart:ui";
 
 class NxColors {
   static const nothingRed = Color(0xFFD71921);
+  static const nothingYellow = Color(0xFFFFC700);
 
   static const lightThemeText = Color(0xFF1C1C1C);
   static const darkThemeText = Color(0xFFEFEFEF);
