@@ -1,5 +1,6 @@
 class NxFonts {
   static const fontInter = "Inter";
+  static const fontInterDigits = "InterMonoDigits";
   static const fontNType = "NType";
   static const fontNDot = "NDot";
   static const fontLettera = "LetteraMono";

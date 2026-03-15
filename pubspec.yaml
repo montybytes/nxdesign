@@ -24,6 +24,9 @@ flutter:
     - family: Inter
       fonts:
         - asset: fonts/Inter.otf
+    - family: InterMonoDigits
+      fonts:
+        - asset: fonts/InterMonoDigits.otf
     - family: LetteraMono
       fonts:
         - asset: fonts/LetteraMono.otf
