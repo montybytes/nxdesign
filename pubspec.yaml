@@ -39,6 +39,12 @@ flutter:
     - family: NDot
       fonts:
         - asset: fonts/NDot77.otf
+    - family: NDotMonoDigits
+      fonts:
+        - asset: fonts/NDot77MonoDigits.otf
     - family: NType
       fonts:
         - asset: fonts/NType82.otf
+    - family: NTypeMonoDigits
+      fonts:
+        - asset: fonts/NType82MonoDigits.otf
