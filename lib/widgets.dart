@@ -370,6 +370,7 @@ class NxIcon extends StatelessWidget {
   static const history = "icons/history.svg";
   static const backspace = "icons/backspace.svg";
   static const function = "icons/function.svg";
+  static const right = "icons/right.svg";
 
   @override
   Widget build(BuildContext context) {
