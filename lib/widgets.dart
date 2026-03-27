@@ -50,18 +50,34 @@ class TextButton extends StatelessWidget {
 }
 
 class EditorDialog extends StatelessWidget {
-  const EditorDialog({required this.children, super.key});
+  const EditorDialog({
+    required this.children,
+    this.spacing = 4,
+    this.insets = const EdgeInsets.symmetric(horizontal: 28),
+    this.padding = const EdgeInsets.all(16),
+    this.alignment = CrossAxisAlignment.center,
+    super.key,
+  });
 
   final List<Widget> children;
+  final double spacing;
+  final EdgeInsets insets;
+  final EdgeInsets padding;
+  final CrossAxisAlignment alignment;
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 28),
+      insetPadding: insets,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: padding,
         child: SingleChildScrollView(
-          child: Column(mainAxisSize: MainAxisSize.min, children: children),
+          child: Column(
+            spacing: spacing,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: alignment,
+            children: children,
+          ),
         ),
       ),
     );
