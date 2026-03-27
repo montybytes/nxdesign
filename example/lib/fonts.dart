@@ -1,0 +1,86 @@
+import "package:flutter/material.dart";
+import "package:nxdesign/fonts.dart";
+
+class FontsDisplayScreen extends StatelessWidget {
+  const FontsDisplayScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("NxDesign Fonts")),
+
+      body: const SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(24),
+            child: Column(
+              spacing: 4,
+              children: [
+                ListTile(
+                  title: Text(
+                    "NType",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontFamily: NxFonts.fontNType,
+                    ),
+                  ),
+                  subtitle: Text("Usage: NxFonts.fontNType"),
+                ),
+                ListTile(
+                  title: Text(
+                    "NDot",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontFamily: NxFonts.fontNDot,
+                    ),
+                  ),
+                  subtitle: Text("Usage: NxFonts.fontNDot"),
+                ),
+                ListTile(
+                  title: Text(
+                    "LetteraMono",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontFamily: NxFonts.fontLettera,
+                    ),
+                  ),
+                  subtitle: Text("Usage: NxFonts.fontLettera"),
+                ),
+                ListTile(
+                  title: Text(
+                    "Inter",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontFamily: NxFonts.fontInter,
+                    ),
+                  ),
+                  subtitle: Text("Usage: NxFonts.fontInter"),
+                ),
+                ListTile(
+                  title: Text(
+                    "SpaceGrotesk",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontFamily: NxFonts.fontSpaceGrotesk,
+                    ),
+                  ),
+                  subtitle: Text("Usage: NxFonts.fontSpaceGrotesk"),
+                ),
+                ListTile(
+                  title: Text(
+                    "SpaceMono",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontFamily: NxFonts.fontSpaceMono,
+                    ),
+                  ),
+                  subtitle: Text("Usage: NxFonts.fontSpaceMono"),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
