@@ -16,4 +16,17 @@ class NxMetrics {
     top: Radius.circular(4),
     bottom: Radius.circular(12),
   );
+
+  static BorderRadius getBorder(int index, int listLength) {
+    if (listLength == 1) {
+      return NxMetrics.largeBorderRadius;
+    }
+    if (index == 0) {
+      return NxMetrics.startBorderRadius;
+    }
+    if (index == listLength - 1) {
+      return NxMetrics.endBorderRadius;
+    }
+    return NxMetrics.defaultBorderRadius;
+  }
 }
