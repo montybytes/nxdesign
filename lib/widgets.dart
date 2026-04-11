@@ -524,6 +524,11 @@ class NxIcon extends m3.StatelessWidget {
   static const backspace = "icons/backspace.svg";
   static const function = "icons/function.svg";
   static const right = "icons/right.svg";
+  static const dayView = "icons/day-view.svg";
+  static const monthView = "icons/month-view.svg";
+  static const filter = "icons/filter.svg";
+  static const left = "icons/left.svg";
+  static const location = "icons/location.svg";
 
   @override
   m3.Widget build(m3.BuildContext context) {
