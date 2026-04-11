@@ -1,10 +1,11 @@
-import "package:flutter/material.dart"
-    hide TextButton, Radio, Switch, Checkbox, Dismissible;
+import "dart:ui";
+
+import "package:flutter/material.dart" as m3;
 import "package:flutter_svg/flutter_svg.dart";
 import "package:nxdesign/colors.dart";
 import "package:nxdesign/metrics.dart";
 
-class TextButton extends StatelessWidget {
+class TextButton extends m3.StatelessWidget {
   const TextButton({
     required this.text,
     this.width,
@@ -18,30 +19,30 @@ class TextButton extends StatelessWidget {
   final String text;
   final double? width;
   final double? height;
-  final BorderRadius? borderRadius;
-  final VoidCallback? onPressed;
-  final Color? highlightColor;
+  final m3.BorderRadius? borderRadius;
+  final m3.VoidCallback? onPressed;
+  final m3.Color? highlightColor;
 
   @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+  m3.Widget build(m3.BuildContext context) {
+    final isDark = m3.Theme.of(context).brightness == m3.Brightness.dark;
     final radius = borderRadius ?? NxMetrics.defaultBorderRadius;
 
-    return SizedBox(
-      height: height ?? kMinInteractiveDimension,
+    return m3.SizedBox(
+      height: height ?? m3.kMinInteractiveDimension,
       width: width,
-      child: Material(
+      child: m3.Material(
         elevation: 0,
         color: isDark
             ? NxColors.darkThemeListItem
             : NxColors.lightThemeListItem,
         borderRadius: radius,
-        child: InkWell(
+        child: m3.InkWell(
           onTap: onPressed,
           borderRadius: radius,
           highlightColor: highlightColor?.withAlpha(25),
-          child: Center(
-            child: Text(text, style: TextStyle(color: highlightColor)),
+          child: m3.Center(
+            child: m3.Text(text, style: m3.TextStyle(color: highlightColor)),
           ),
         ),
       ),
@@ -49,32 +50,32 @@ class TextButton extends StatelessWidget {
   }
 }
 
-class EditorDialog extends StatelessWidget {
+class EditorDialog extends m3.StatelessWidget {
   const EditorDialog({
     required this.children,
     this.spacing = 4,
-    this.insets = const EdgeInsets.symmetric(horizontal: 28),
-    this.padding = const EdgeInsets.all(16),
-    this.alignment = CrossAxisAlignment.center,
+    this.insets = const m3.EdgeInsets.symmetric(horizontal: 28),
+    this.padding = const m3.EdgeInsets.all(16),
+    this.alignment = m3.CrossAxisAlignment.center,
     super.key,
   });
 
-  final List<Widget> children;
+  final List<m3.Widget> children;
   final double spacing;
-  final EdgeInsets insets;
-  final EdgeInsets padding;
-  final CrossAxisAlignment alignment;
+  final m3.EdgeInsets insets;
+  final m3.EdgeInsets padding;
+  final m3.CrossAxisAlignment alignment;
 
   @override
-  Widget build(BuildContext context) {
-    return Dialog(
+  m3.Widget build(m3.BuildContext context) {
+    return m3.Dialog(
       insetPadding: insets,
-      child: Padding(
+      child: m3.Padding(
         padding: padding,
-        child: SingleChildScrollView(
-          child: Column(
+        child: m3.SingleChildScrollView(
+          child: m3.Column(
             spacing: spacing,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: m3.MainAxisSize.min,
             crossAxisAlignment: alignment,
             children: children,
           ),
@@ -84,7 +85,7 @@ class EditorDialog extends StatelessWidget {
   }
 }
 
-class ConfirmActionDialog extends StatelessWidget {
+class ConfirmActionDialog extends m3.StatelessWidget {
   const ConfirmActionDialog({
     required this.titleText,
     required this.infoText,
@@ -101,35 +102,95 @@ class ConfirmActionDialog extends StatelessWidget {
   final bool? isWarning;
 
   @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      actionsPadding: const EdgeInsets.all(16),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
-      title: Text(titleText, textAlign: TextAlign.center),
-      content: Text(infoText, textAlign: TextAlign.center),
+  m3.Widget build(m3.BuildContext context) {
+    return m3.AlertDialog(
+      actionsPadding: const m3.EdgeInsets.all(16),
+      contentPadding: const m3.EdgeInsets.symmetric(
+        horizontal: 48,
+        vertical: 16,
+      ),
+      title: m3.Text(titleText, textAlign: m3.TextAlign.center),
+      content: m3.Text(infoText, textAlign: m3.TextAlign.center),
       actions: [
         TextButton(
           height: 56,
           width: double.infinity,
           text: confirmText ?? "OK",
           borderRadius: NxMetrics.startBorderRadius,
-          onPressed: () => Navigator.of(context).pop(true),
+          onPressed: () => m3.Navigator.of(context).pop(true),
           highlightColor: NxColors.nothingRed,
         ),
-        const SizedBox(height: 2),
+        const m3.SizedBox(height: 2),
         TextButton(
           height: 56,
           width: double.infinity,
           text: cancelText ?? "CANCEL",
           borderRadius: NxMetrics.endBorderRadius,
-          onPressed: () => Navigator.of(context).pop(false),
+          onPressed: () => m3.Navigator.of(context).pop(false),
         ),
       ],
     );
   }
 }
 
-class Dismissible extends StatefulWidget {
+class AppBar extends m3.StatelessWidget {
+  const AppBar({
+    super.key,
+    this.title,
+    this.titleStyle,
+    this.centerTitle = false,
+    this.padding,
+    this.actions,
+  });
+
+  final String? title;
+  final m3.TextStyle? titleStyle;
+  final bool centerTitle;
+  final List<m3.Widget>? actions;
+  final m3.EdgeInsets? padding;
+
+  @override
+  m3.Widget build(m3.BuildContext context) {
+    final canPop = m3.Navigator.of(context).canPop();
+    final isHome = m3.ModalRoute.of(context)?.settings.name == "/";
+    final hasTitle = title != null;
+    final effectivePadding = canPop
+        ? m3.EdgeInsets.zero
+        : hasTitle
+        ? const m3.EdgeInsets.only(left: 24)
+        : padding ?? m3.EdgeInsets.zero;
+
+    return m3.Padding(
+      padding: effectivePadding,
+      child: m3.AppBar(
+        titleSpacing: 0,
+        centerTitle: centerTitle,
+        automaticallyImplyLeading: false,
+        leading: canPop && !isHome
+            ? m3.IconButton(
+                tooltip: "Back",
+                onPressed: () => m3.Navigator.of(context).pop(),
+                icon: const NxIcon(path: NxIcon.back),
+                padding: const m3.EdgeInsets.all(14),
+              )
+            : null,
+        title: hasTitle
+            ? m3.Text(
+                title!,
+                style: titleStyle,
+                strutStyle: m3.StrutStyle(
+                  forceStrutHeight: true,
+                  fontSize: titleStyle?.fontSize,
+                ),
+              )
+            : null,
+        actions: actions,
+      ),
+    );
+  }
+}
+
+class Dismissible extends m3.StatefulWidget {
   const Dismissible({
     required this.onDismissed,
     required this.background,
@@ -139,22 +200,22 @@ class Dismissible extends StatefulWidget {
     super.key,
   });
 
-  final VoidCallback onDismissed;
-  final Widget background;
-  final Widget child;
+  final m3.VoidCallback onDismissed;
+  final m3.Widget background;
+  final m3.Widget child;
   final double dismissThreshold;
   final Future<bool?> Function()? confirmDismiss;
 
   @override
-  State<Dismissible> createState() => _DismissibleState();
+  m3.State<Dismissible> createState() => _DismissibleState();
 }
 
-class _DismissibleState extends State<Dismissible>
-    with TickerProviderStateMixin {
-  final _childKey = GlobalKey();
+class _DismissibleState extends m3.State<Dismissible>
+    with m3.TickerProviderStateMixin {
+  final _childKey = m3.GlobalKey();
 
-  late AnimationController _dragController;
-  late Animation<double> _dragAnimation;
+  late m3.AnimationController _dragController;
+  late m3.Animation<double> _dragAnimation;
 
   var _dragExtent = 0.0;
   var _maxWidth = 0.0;
@@ -162,22 +223,22 @@ class _DismissibleState extends State<Dismissible>
   var _notifiedDismiss = false;
 
   double? _currentHeight;
-  Size? _childSize;
+  m3.Size? _childSize;
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    m3.WidgetsBinding.instance.addPostFrameCallback((_) {
       _measureChild();
     });
 
-    _dragController = AnimationController(
+    _dragController = m3.AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 200),
     );
 
-    _dragAnimation = Tween<double>(begin: 0, end: 0).animate(_dragController)
+    _dragAnimation = m3.Tween<double>(begin: 0, end: 0).animate(_dragController)
       ..addListener(() {
         setState(() {
           _dragExtent = _dragAnimation.value;
@@ -188,7 +249,7 @@ class _DismissibleState extends State<Dismissible>
   @override
   void didUpdateWidget(covariant Dismissible oldWidget) {
     super.didUpdateWidget(oldWidget);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    m3.WidgetsBinding.instance.addPostFrameCallback((_) {
       _measureChild();
     });
   }
@@ -205,7 +266,7 @@ class _DismissibleState extends State<Dismissible>
       return;
     }
 
-    final box = context.findRenderObject() as RenderBox;
+    final box = context.findRenderObject() as m3.RenderBox;
     final size = box.size;
 
     setState(() {
@@ -213,7 +274,7 @@ class _DismissibleState extends State<Dismissible>
     });
   }
 
-  Future<void> _handleDragUpdate(DragUpdateDetails details) async {
+  Future<void> _handleDragUpdate(m3.DragUpdateDetails details) async {
     _dragExtent += details.delta.dx;
 
     if (_dragExtent > 0) {
@@ -226,7 +287,7 @@ class _DismissibleState extends State<Dismissible>
     setState(() {});
   }
 
-  Future<void> _handleDragEnd(DragEndDetails details) async {
+  Future<void> _handleDragEnd(m3.DragEndDetails details) async {
     final progress = _dragExtent.abs() / _maxWidth;
 
     if (progress <= widget.dismissThreshold) {
@@ -246,8 +307,8 @@ class _DismissibleState extends State<Dismissible>
 
   Future<void> _animateTo(double target) async {
     _dragAnimation =
-        Tween<double>(begin: _dragExtent, end: target).animate(
-          CurvedAnimation(parent: _dragController, curve: Curves.easeOut),
+        m3.Tween<double>(begin: _dragExtent, end: target).animate(
+          m3.CurvedAnimation(parent: _dragController, curve: m3.Curves.easeOut),
         )..addListener(() {
           setState(() {
             _dragExtent = _dragAnimation.value;
@@ -265,15 +326,15 @@ class _DismissibleState extends State<Dismissible>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
+  m3.Widget build(m3.BuildContext context) {
+    return m3.LayoutBuilder(
       builder: (context, constraints) {
         _maxWidth = constraints.maxWidth;
         _currentHeight ??= _childSize?.height ?? constraints.maxHeight;
 
         final revealWidth = _dragExtent.abs();
 
-        return AnimatedSize(
+        return m3.AnimatedSize(
           duration: const Duration(milliseconds: 150),
           onEnd: () {
             if (_dismissed && !_notifiedDismiss) {
@@ -281,29 +342,29 @@ class _DismissibleState extends State<Dismissible>
               widget.onDismissed.call();
             }
           },
-          child: SizedBox(
+          child: m3.SizedBox(
             height: _dismissed ? 0 : null,
-            child: GestureDetector(
+            child: m3.GestureDetector(
               onHorizontalDragUpdate: _handleDragUpdate,
               onHorizontalDragEnd: _handleDragEnd,
-              child: SizedBox(
+              child: m3.SizedBox(
                 width: _maxWidth,
-                child: Stack(
+                child: m3.Stack(
                   children: [
-                    Align(
-                      alignment: AlignmentGeometry.centerRight,
-                      child: Transform.translate(
+                    m3.Align(
+                      alignment: m3.AlignmentGeometry.centerRight,
+                      child: m3.Transform.translate(
                         offset: Offset(_dragExtent, 0),
-                        child: SizedBox(
+                        child: m3.SizedBox(
                           key: _childKey,
                           width: _maxWidth,
                           child: widget.child,
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentGeometry.centerRight,
-                      child: SizedBox(
+                    m3.Align(
+                      alignment: m3.AlignmentGeometry.centerRight,
+                      child: m3.SizedBox(
                         width: revealWidth.clamp(revealWidth, _maxWidth),
                         height: _childSize?.height,
                         child: widget.background,
@@ -320,7 +381,7 @@ class _DismissibleState extends State<Dismissible>
   }
 }
 
-class NxIcon extends StatelessWidget {
+class NxIcon extends m3.StatelessWidget {
   const NxIcon({
     required this.path,
     this.package = "nxdesign",
@@ -333,7 +394,7 @@ class NxIcon extends StatelessWidget {
   final String path;
   final String package;
   final double size;
-  final Color? color;
+  final m3.Color? color;
   final bool selected;
 
   static const add = "icons/add.svg";
@@ -389,57 +450,57 @@ class NxIcon extends StatelessWidget {
   static const right = "icons/right.svg";
 
   @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+  m3.Widget build(m3.BuildContext context) {
+    final isDark = m3.Theme.of(context).brightness == m3.Brightness.dark;
     final unselectedColor = isDark
         ? NxColors.darkThemeText
         : NxColors.lightThemeText;
 
-    return SizedBox.square(
+    return m3.SizedBox.square(
       dimension: size,
       child: SvgPicture.asset(
         path,
         package: package,
-        fit: BoxFit.contain,
-        colorFilter: ColorFilter.mode(
+        fit: m3.BoxFit.contain,
+        colorFilter: m3.ColorFilter.mode(
           selected ? NxColors.nothingRed : color ?? unselectedColor,
-          BlendMode.srcIn,
+          m3.BlendMode.srcIn,
         ),
       ),
     );
   }
 }
 
-class Checkbox extends StatelessWidget {
+class Checkbox extends m3.StatelessWidget {
   const Checkbox({required this.value, this.onChanged, super.key});
 
   final bool value;
-  final ValueChanged<bool>? onChanged;
+  final m3.ValueChanged<bool>? onChanged;
 
   @override
-  Widget build(BuildContext context) {
+  m3.Widget build(m3.BuildContext context) {
     const duration = Duration(milliseconds: 150);
 
-    return SizedBox.square(
+    return m3.SizedBox.square(
       dimension: 48,
-      child: InkWell(
-        customBorder: const CircleBorder(),
+      child: m3.InkWell(
+        customBorder: const m3.CircleBorder(),
         onTap: () => onChanged?.call(!value),
-        child: Center(
-          child: SizedBox.square(
+        child: m3.Center(
+          child: m3.SizedBox.square(
             dimension: 20,
-            child: AnimatedContainer(
+            child: m3.AnimatedContainer(
               duration: duration,
-              curve: Curves.easeInOut,
-              decoration: BoxDecoration(
+              curve: m3.Curves.easeInOut,
+              decoration: m3.BoxDecoration(
                 color: value ? NxColors.lightThemeCard : null,
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: m3.BorderRadius.circular(4),
                 border: value
                     ? null
-                    : Border.all(color: NxColors.lightThemeCard, width: 2),
+                    : m3.Border.all(color: NxColors.lightThemeCard, width: 2),
               ),
-              child: Center(
-                child: AnimatedOpacity(
+              child: m3.Center(
+                child: m3.AnimatedOpacity(
                   duration: duration,
                   opacity: value ? 1.0 : 0.0,
                   child: const NxIcon(
@@ -456,19 +517,19 @@ class Checkbox extends StatelessWidget {
   }
 }
 
-class Switch extends StatelessWidget {
+class Switch extends m3.StatelessWidget {
   const Switch({required this.value, this.onChanged, super.key});
 
   final bool value;
-  final ValueChanged<bool>? onChanged;
+  final m3.ValueChanged<bool>? onChanged;
 
   @override
-  Widget build(BuildContext context) {
+  m3.Widget build(m3.BuildContext context) {
     const width = 48.0;
     const height = 48.0;
     const duration = Duration(milliseconds: 250);
 
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark = m3.Theme.of(context).brightness == m3.Brightness.dark;
     final activeColor = isDark
         ? NxColors.lightThemeBackground
         : NxColors.darkThemeBackground;
@@ -479,35 +540,35 @@ class Switch extends StatelessWidget {
         ? NxColors.darkThemeBackground
         : NxColors.lightThemeBackground;
 
-    return SizedBox(
+    return m3.SizedBox(
       height: height,
       width: width,
-      child: InkWell(
-        customBorder: const CircleBorder(),
+      child: m3.InkWell(
+        customBorder: const m3.CircleBorder(),
         onTap: () => onChanged?.call(!value),
-        child: Center(
-          child: AnimatedContainer(
+        child: m3.Center(
+          child: m3.AnimatedContainer(
             height: 24,
             width: double.infinity,
             duration: duration,
-            padding: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(height / 2),
+            padding: const m3.EdgeInsets.all(2),
+            decoration: m3.BoxDecoration(
+              borderRadius: m3.BorderRadius.circular(height / 2),
               color: value ? activeColor : inactiveColor,
             ),
-            child: Stack(
+            child: m3.Stack(
               children: [
-                AnimatedAlign(
+                m3.AnimatedAlign(
                   alignment: value
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
+                      ? m3.Alignment.centerRight
+                      : m3.Alignment.centerLeft,
                   duration: duration,
-                  curve: Curves.easeInOut,
-                  child: Container(
+                  curve: m3.Curves.easeInOut,
+                  child: m3.Container(
                     width: 20,
                     height: 20,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
+                    decoration: m3.BoxDecoration(
+                      shape: m3.BoxShape.circle,
                       color: thumbColor,
                     ),
                   ),
@@ -521,28 +582,28 @@ class Switch extends StatelessWidget {
   }
 }
 
-class Radio extends StatelessWidget {
+class Radio extends m3.StatelessWidget {
   const Radio({required this.value, super.key, this.onChanged});
 
   final bool value;
-  final ValueChanged<bool>? onChanged;
+  final m3.ValueChanged<bool>? onChanged;
 
   @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+  m3.Widget build(m3.BuildContext context) {
+    final isDark = m3.Theme.of(context).brightness == m3.Brightness.dark;
 
-    return SizedBox.square(
+    return m3.SizedBox.square(
       dimension: 48,
-      child: InkWell(
+      child: m3.InkWell(
         onTap: () => onChanged?.call(!value),
-        customBorder: const CircleBorder(),
-        child: Center(
-          child: SizedBox.square(
+        customBorder: const m3.CircleBorder(),
+        child: m3.Center(
+          child: m3.SizedBox.square(
             dimension: 20,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
+            child: m3.DecoratedBox(
+              decoration: m3.BoxDecoration(
+                shape: m3.BoxShape.circle,
+                border: m3.Border.all(
                   width: 2,
                   color: isDark
                       ? NxColors.lightThemeCard
@@ -551,13 +612,13 @@ class Radio extends StatelessWidget {
                       : NxColors.lightThemeCard,
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(6),
+              child: m3.Padding(
+                padding: const m3.EdgeInsets.all(6),
                 child: value
-                    ? SizedBox.expand(
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                    ? m3.SizedBox.expand(
+                        child: m3.DecoratedBox(
+                          decoration: m3.BoxDecoration(
+                            shape: m3.BoxShape.circle,
                             color: isDark
                                 ? NxColors.lightThemeCard
                                 : NxColors.darkThemeCard,
@@ -574,7 +635,7 @@ class Radio extends StatelessWidget {
   }
 }
 
-class MultiSetting<T> extends StatelessWidget {
+class MultiSetting<T> extends m3.StatelessWidget {
   const MultiSetting({
     required this.selected,
     required this.selectables,
@@ -587,55 +648,57 @@ class MultiSetting<T> extends StatelessWidget {
   final Function(T selection)? onSelectionChanged;
 
   @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
+  m3.Widget build(m3.BuildContext context) {
+    return m3.DecoratedBox(
+      decoration: m3.BoxDecoration(
         borderRadius: NxMetrics.largeBorderRadius,
-        border: Border.all(color: Colors.grey.withAlpha(80)),
+        border: m3.Border.all(color: m3.Colors.grey.withAlpha(80)),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: m3.Row(
+        mainAxisSize: m3.MainAxisSize.max,
+        mainAxisAlignment: m3.MainAxisAlignment.spaceBetween,
         children: [
           for (var i = 0; i < selectables.length; i++)
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(1),
-                child: Material(
+            m3.Expanded(
+              child: m3.Padding(
+                padding: const m3.EdgeInsets.all(1),
+                child: m3.Material(
                   color: selected == selectables[i].data
-                      ? Colors.grey.withAlpha(80)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.horizontal(
-                    left: Radius.circular(i == 0 ? 12 - 1 : 0),
-                    right: Radius.circular(
+                      ? m3.Colors.grey.withAlpha(80)
+                      : m3.Colors.transparent,
+                  borderRadius: m3.BorderRadius.horizontal(
+                    left: m3.Radius.circular(i == 0 ? 12 - 1 : 0),
+                    right: m3.Radius.circular(
                       i == selectables.length - 1 ? 12 - 1 : 0,
                     ),
                   ),
-                  child: InkWell(
-                    borderRadius: BorderRadius.horizontal(
-                      left: Radius.circular(i == 0 ? 12 - 1 : 0),
-                      right: Radius.circular(
+                  child: m3.InkWell(
+                    borderRadius: m3.BorderRadius.horizontal(
+                      left: m3.Radius.circular(i == 0 ? 12 - 1 : 0),
+                      right: m3.Radius.circular(
                         i == selectables.length - 1 ? 12 - 1 : 0,
                       ),
                     ),
                     onTap: () {
                       onSelectionChanged?.call(selectables[i].data);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    child: m3.Padding(
+                      padding: const m3.EdgeInsets.symmetric(vertical: 8),
+                      child: m3.Column(
+                        mainAxisSize: m3.MainAxisSize.max,
+                        mainAxisAlignment: m3.MainAxisAlignment.center,
                         children: [
                           if (selectables[i].icon != null)
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: SizedBox.square(
+                            m3.Padding(
+                              padding: const m3.EdgeInsets.symmetric(
+                                vertical: 8,
+                              ),
+                              child: m3.SizedBox.square(
                                 dimension: 32,
                                 child: selectables[i].icon,
                               ),
                             ),
-                          Text(selectables[i].label),
+                          m3.Text(selectables[i].label),
                         ],
                       ),
                     ),
@@ -651,7 +714,7 @@ class MultiSetting<T> extends StatelessWidget {
 
 class MultiSettingData<T> {
   final String label;
-  final Widget? icon;
+  final m3.Widget? icon;
   final T data;
 
   const MultiSettingData({required this.label, required this.data, this.icon});
