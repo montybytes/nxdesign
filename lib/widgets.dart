@@ -190,6 +190,82 @@ class AppBar extends m3.StatelessWidget {
   }
 }
 
+class NavigationItem {
+  final m3.Widget destination;
+  final String text;
+  final String icon;
+  final String? tooltip;
+
+  NavigationItem({
+    required this.destination,
+    required this.text,
+    required this.icon,
+    this.tooltip,
+  });
+}
+
+class NavBar extends m3.StatefulWidget {
+  const NavBar({
+    required this.items,
+    required this.onIndexChanged,
+    this.selectedIndex = 0,
+    super.key,
+  });
+
+  final List<NavigationItem> items;
+  final Function(int index) onIndexChanged;
+  final int selectedIndex;
+
+  @override
+  m3.State<NavBar> createState() => _BottomNavigationBarState();
+}
+
+class _BottomNavigationBarState extends m3.State<NavBar> {
+  bool get _isDark => m3.Theme.of(context).brightness == Brightness.dark;
+
+  @override
+  m3.Widget build(m3.BuildContext context) {
+    return m3.Material(
+      color: _isDark ? NxColors.darkThemeListItem : NxColors.lightThemeListItem,
+      shape: const m3.StadiumBorder(),
+      child: m3.SizedBox(
+        height: 72,
+        child: m3.Padding(
+          padding: const m3.EdgeInsets.symmetric(horizontal: 16),
+          child: m3.Row(
+            mainAxisSize: m3.MainAxisSize.max,
+            crossAxisAlignment: m3.CrossAxisAlignment.stretch,
+            children: [
+              for (final item in widget.items)
+                m3.Expanded(
+                  child: m3.GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        widget.onIndexChanged.call(widget.items.indexOf(item));
+                      });
+                    },
+                    child: m3.Tooltip(
+                      message: item.text,
+                      enableFeedback: true,
+                      verticalOffset: 40,
+                      preferBelow: false,
+                      child: NxIcon(
+                        size: 24,
+                        path: item.icon,
+                        selected:
+                            widget.selectedIndex == widget.items.indexOf(item),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class Dismissible extends m3.StatefulWidget {
   const Dismissible({
     required this.onDismissed,
