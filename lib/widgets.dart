@@ -249,11 +249,14 @@ class _BottomNavigationBarState extends m3.State<NavBar> {
                       enableFeedback: true,
                       verticalOffset: 40,
                       preferBelow: false,
-                      child: NxIcon(
-                        size: 24,
-                        path: item.icon,
-                        selected:
-                            widget.selectedIndex == widget.items.indexOf(item),
+                      child: m3.Center(
+                        child: NxIcon(
+                          size: 24,
+                          path: item.icon,
+                          selected:
+                              widget.selectedIndex ==
+                              widget.items.indexOf(item),
+                        ),
                       ),
                     ),
                   ),
