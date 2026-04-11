@@ -1,15 +1,21 @@
-import "package:flutter/material.dart";
+import "package:flutter/material.dart" hide AppBar;
 import "package:nxdesign/fonts.dart";
+import "package:nxdesign/widgets.dart";
 
 class FontsDisplayScreen extends StatelessWidget {
   const FontsDisplayScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("NxDesign Fonts")),
-
-      body: const SafeArea(
+    return const Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBar(
+          title: "NxDesign Colors",
+          titleStyle: TextStyle(fontSize: 32, fontFamily: NxFonts.fontNType),
+        ),
+      ),
+      body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(24),

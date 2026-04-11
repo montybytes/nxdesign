@@ -1,6 +1,7 @@
 import "package:flutter/material.dart"
-    hide Checkbox, Switch, Radio, Dismissible, TextButton;
+    hide Checkbox, Switch, Radio, Dismissible, TextButton, AppBar;
 import "package:nxdesign/colors.dart";
+import "package:nxdesign/fonts.dart";
 import "package:nxdesign/metrics.dart";
 import "package:nxdesign/widgets.dart";
 import "package:nxdesign_example/colors.dart";
@@ -86,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Text("You can use this as a dialog with custom children"),
               const Text("The default children padding is 16"),
               TextButton(
-                borderRadius: NxMetrics.endBorderRadius,
+                borderRadius: NxMetrics.largeBorderRadius,
                 onPressed: () => Navigator.of(context).pop(),
                 text: "Close",
               ),
@@ -115,7 +116,24 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("NxDesign example app")),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: AppBar(
+          title: "NxDesign Example",
+          titleStyle: const TextStyle(
+            fontFamily: NxFonts.fontNType,
+            fontSize: 32,
+          ),
+          actions: [
+            IconButton(
+              tooltip: "sample tooltip",
+              padding: const EdgeInsets.all(14),
+              icon: const NxIcon(path: NxIcon.info),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

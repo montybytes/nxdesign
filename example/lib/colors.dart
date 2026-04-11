@@ -1,6 +1,8 @@
-import "package:flutter/material.dart";
+import "package:flutter/material.dart" hide AppBar;
 import "package:nxdesign/colors.dart";
+import "package:nxdesign/fonts.dart";
 import "package:nxdesign/metrics.dart";
+import "package:nxdesign/widgets.dart";
 
 class ColorsDisplayScreen extends StatelessWidget {
   const ColorsDisplayScreen({super.key});
@@ -8,7 +10,13 @@ class ColorsDisplayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("NxDesign Colors")),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBar(
+          title: "NxDesign Colors",
+          titleStyle: TextStyle(fontSize: 32, fontFamily: NxFonts.fontNType),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
