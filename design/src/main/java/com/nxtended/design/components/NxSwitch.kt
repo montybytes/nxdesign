@@ -38,16 +38,23 @@ fun NxSwitch(
     onChanged: (Boolean) -> Unit,
     enabled: Boolean = true,
 ) {
-    val activeColor = NxTheme.colors.text
-    val inactiveColor = NxTheme.colors.inactive
-    val thumbColor = NxTheme.colors.background
+    val thumbColor = when {
+        enabled -> NxTheme.colors.background
+        else -> NxTheme.colors.background.copy(alpha = 0.5f)
+    }
 
     val trackColor by animateColorAsState(
         label = "switchTrackColor",
-        targetValue = if (value) {
-            if (enabled) activeColor else NxTheme.colors.text.copy(alpha = 0.4f)
-        } else {
-            if (enabled) inactiveColor else NxTheme.colors.text.copy(alpha = 0.4f)
+        targetValue = when {
+            value -> when {
+                enabled -> NxTheme.colors.onBackground
+                else -> NxTheme.colors.onBackground.copy(alpha = 0.25f)
+            }
+
+            else -> when {
+                enabled -> NxTheme.colors.onBackground.copy(alpha = 0.75f)
+                else -> NxTheme.colors.onBackground.copy(alpha = 0.25f)
+            }
         },
         animationSpec = tween(
             durationMillis = ANIMATION_DURATION, easing = FastOutSlowInEasing
@@ -70,8 +77,7 @@ fun NxSwitch(
         interactionSource = remember { MutableInteractionSource() },
         contentPadding = PaddingValues(0.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Transparent,
-            disabledContainerColor = Color.Transparent
+            containerColor = Color.Transparent, disabledContainerColor = Color.Transparent
         ),
     ) {
         Box(
@@ -86,11 +92,12 @@ fun NxSwitch(
                     .size(20.dp)
                     .offset(x = thumbOffset)
                     .clip(CircleShape)
-                    .background(if (enabled) thumbColor else NxTheme.colors.inactive)
+                    .background(thumbColor)
             )
         }
     }
 }
+
 
 @Preview
 @Composable
@@ -111,7 +118,7 @@ private fun NxSwitchInteractivePreview() {
 @Composable
 private fun NxSwitchLightPreview() {
     NxTheme {
-        Surface(color = NxTheme.colors.background) {
+        Surface {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.padding(4.dp)
@@ -131,7 +138,7 @@ private fun NxSwitchLightPreview() {
 @Composable
 private fun NxSwitchDarkPreview() {
     NxTheme(darkTheme = true) {
-        Surface(color = NxTheme.colors.background) {
+        Surface {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.padding(4.dp)

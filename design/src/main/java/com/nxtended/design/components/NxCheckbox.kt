@@ -46,7 +46,7 @@ fun NxCheckbox(
 ) {
     val checkboxColor by animateColorAsState(
         label = "checkboxColor",
-        targetValue = if (value) NxTheme.colors.text else Color.Transparent,
+        targetValue = if (value) NxTheme.colors.onBackground else Color.Transparent,
         animationSpec = tween(
             durationMillis = ANIMATION_DURATION, easing = FastOutSlowInEasing
         ),
@@ -60,9 +60,12 @@ fun NxCheckbox(
         ),
     )
 
-    val borderColor = if (enabled) {
-        if (value) NxTheme.colors.text else NxTheme.colors.text.copy(alpha = 0.4f)
-    } else NxTheme.colors.inactive
+    val borderColor = when {
+        value -> Color.Transparent
+        enabled -> NxTheme.colors.onBackground
+        else -> NxTheme.colors.onBackground.copy(alpha = 0.25f)
+    }
+
 
     Button(
         enabled = enabled,
@@ -80,8 +83,11 @@ fun NxCheckbox(
             modifier = Modifier
                 .size(20.dp)
                 .background(
-                    color = if (enabled) checkboxColor else if (value) NxTheme.colors.inactive else Color.Transparent,
-                    shape = NxShapes.Default
+                    color = when {
+                        enabled -> checkboxColor
+                        value -> NxTheme.colors.onBackground.copy(0.25f)
+                        else -> Color.Transparent
+                    }, shape = NxShapes.Default
                 ), contentAlignment = Alignment.Center
         ) {
             if (!value) {
@@ -103,6 +109,7 @@ fun NxCheckbox(
         }
     }
 }
+
 
 @Preview
 @Composable

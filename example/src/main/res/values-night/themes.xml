@@ -1,3 +1,5 @@
 <resources>
-    <style name="Theme.Android" parent="android:style/Theme.Material.NoActionBar" />
+    <style name="Theme.Android" parent="android:style/Theme.Material.NoActionBar" >
+        <item name="android:windowBackground">@android:color/background_dark</item>
+    </style>
 </resources>

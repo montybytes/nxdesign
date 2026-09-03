@@ -21,7 +21,7 @@ import com.nxtended.design.theme.NxTheme
 @Composable
 fun NxCard(
     modifier: Modifier = Modifier,
-    color: Color = NxTheme.colors.card,
+    color: Color = NxTheme.colors.surfaceVariant,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Card(

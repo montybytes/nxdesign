@@ -45,17 +45,15 @@ fun <T> NxMultiSelectButton(
     onSelectionChanged: ((T) -> Unit)? = null,
     enabled: Boolean = true,
 ) {
-    val outerShape = NxShapes.Large
-
     Row(
         modifier = modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
-            .clip(outerShape)
+            .clip(NxShapes.Large)
             .border(
                 width = 1.dp,
-                color = Color.Gray.copy(alpha = 80f / 255f),
-                shape = outerShape,
+                color = Color.Gray.copy(alpha = 0.25f),
+                shape = NxShapes.Large,
             )
             .padding(1.dp),
     ) {
@@ -78,8 +76,8 @@ fun <T> NxMultiSelectButton(
                     .clip(shape)
                     .fillMaxHeight(),
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = NxTheme.colors.text,
-                    containerColor = if (isSelected) Color.Gray.copy(alpha = 0.3f) else Color.Transparent
+                    contentColor = NxTheme.colors.onTertiary,
+                    containerColor = if (isSelected) NxTheme.colors.tertiary else Color.Transparent
                 ),
             ) {
                 Column(
@@ -99,26 +97,22 @@ fun <T> NxMultiSelectButton(
 @Composable
 private fun NxMultiSelectButtonPreview() {
     NxTheme {
-        var selected by remember { mutableStateOf("Grid") }
+        var selected by remember { mutableStateOf("List") }
 
         val items = listOf(
             NxMultiSelectItem(
                 label = "List", data = "List", icon = { NxIcon(icon = R.drawable.nx_listview) }),
             NxMultiSelectItem(
-                label = "Grid",
-                data = "Grid",
-            ),
+                label = "Grid", data = "Grid", icon = { NxIcon(icon = R.drawable.nx_gridview) }),
             NxMultiSelectItem(
-                label = "Day",
-                data = "Day",
-            ),
+                label = "Day", data = "Day", icon = { NxIcon(icon = R.drawable.nx_day_view) }),
             NxMultiSelectItem(
                 label = "Month",
                 data = "Month",
-            ),
+                icon = { NxIcon(icon = R.drawable.nx_month_view) }),
         )
 
-        Surface(color = NxTheme.colors.background) {
+        Surface {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -138,26 +132,22 @@ private fun NxMultiSelectButtonPreview() {
 @Composable
 private fun NxMultiSelectButtonDarkPreview() {
     NxTheme(darkTheme = true) {
-        var selected by remember { mutableStateOf("Grid") }
+        var selected by remember { mutableStateOf("List") }
 
         val items = listOf(
             NxMultiSelectItem(
                 label = "List", data = "List", icon = { NxIcon(icon = R.drawable.nx_listview) }),
             NxMultiSelectItem(
-                label = "Grid",
-                data = "Grid",
-            ),
+                label = "Grid", data = "Grid", icon = { NxIcon(icon = R.drawable.nx_gridview) }),
             NxMultiSelectItem(
-                label = "Day",
-                data = "Day",
-            ),
+                label = "Day", data = "Day", icon = { NxIcon(icon = R.drawable.nx_day_view) }),
             NxMultiSelectItem(
                 label = "Month",
                 data = "Month",
-            ),
+                icon = { NxIcon(icon = R.drawable.nx_month_view) }),
         )
 
-        Surface(color = NxTheme.colors.background) {
+        Surface {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()

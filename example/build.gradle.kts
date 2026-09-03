@@ -19,6 +19,9 @@ android {
 
     buildTypes {
         release {
+            isShrinkResources = true
+            isMinifyEnabled = true
+            signingConfig = signingConfigs.getByName("debug")
             optimization {
                 enable = false
             }
@@ -32,6 +35,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":design"))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.core.ktx)
@@ -40,5 +44,4 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.ui.tooling.preview)
     debugImplementation(libs.androidx.ui.tooling)
-    implementation(project(":design"))
 }

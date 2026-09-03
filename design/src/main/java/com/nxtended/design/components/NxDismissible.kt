@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -122,12 +121,10 @@ fun NxDismissible(
                     }
                 },
 
-                onDragCancel = {
-                    scope.launch { animateBack() }
-                })
+                onDragCancel = { scope.launch { animateBack() } })
         }) {
 
-        val revealWidth = with(density) { offsetX.value.absoluteValue.toDp() }
+        //val revealWidth = with(density) { offsetX.value.absoluteValue.toDp() }
 
         val contentHeightDp = with(density) { contentHeight.toDp() }
 
@@ -136,7 +133,7 @@ fun NxDismissible(
             content = background,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .width(revealWidth)
+                .fillMaxWidth()
                 .height(contentHeightDp)
         )
 
@@ -194,13 +191,12 @@ private fun NxDismissiblePreview() {
                             },
                         ) {
                             Surface(
-                                color = NxTheme.colors.listItem,
+                                contentColor = NxTheme.colors.onSurface,
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = listItemShape(index, items.size)
                             ) {
                                 Text(
                                     text = item,
-                                    color = NxTheme.colors.text,
                                     modifier = Modifier.padding(
                                         horizontal = NxDimensions.MD, vertical = NxDimensions.LG
                                     ),
@@ -258,13 +254,12 @@ private fun NxDismissibleDarkPreview() {
                             },
                         ) {
                             Surface(
-                                color = NxTheme.colors.listItem,
+                                contentColor = NxTheme.colors.onSurface,
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = listItemShape(index, items.size)
                             ) {
                                 Text(
                                     text = item,
-                                    color = NxTheme.colors.text,
                                     modifier = Modifier.padding(
                                         horizontal = NxDimensions.MD, vertical = NxDimensions.LG
                                     ),

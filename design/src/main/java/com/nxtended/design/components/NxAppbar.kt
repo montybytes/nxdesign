@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -48,20 +49,20 @@ fun NxAppbar(
         shadowElevation = 0.dp,
         modifier = modifier
             .fillMaxWidth()
-            .height(56.dp),
+            .height(56.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = if (onNavigateBack != null || hasTitle) 0.dp else padding),
+                .padding(start = if (onNavigateBack != null || hasTitle) 0.dp else padding)
         ) {
             if (onNavigateBack != null) {
                 if (leadingOverride != null) leadingOverride()
                 else IconButton(
                     onClick = { onNavigateBack.invoke() },
                     modifier = Modifier
-                        .fillMaxHeight()
+                        .heightIn(48.dp)
                         .aspectRatio(1f),
                     colors = IconButtonDefaults.iconButtonColors(containerColor = Color.Transparent)
                 ) {
@@ -76,7 +77,7 @@ fun NxAppbar(
                 Text(
                     text = title,
                     style = titleStyle ?: NxTheme.typography.titleLarge,
-                    color = NxTheme.colors.text,
+                    color = NxTheme.colors.onBackground,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
                         .weight(1f)
@@ -117,11 +118,8 @@ private fun NxAppbarPreview() {
                     IconButton(
                         onClick = {},
                         modifier = Modifier
-                            .fillMaxHeight()
+                            .heightIn(48.dp)
                             .aspectRatio(1f),
-                        colors = IconButtonDefaults.iconButtonColors(
-                            containerColor = Color.Transparent
-                        )
                     ) {
                         NxIcon(
                             icon = NxIcons.Settings,
@@ -134,9 +132,7 @@ private fun NxAppbarPreview() {
                     modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "Hello, world!",
-                        color = NxTheme.colors.text,
-                        style = NxTheme.typography.bodyLarge
+                        text = "Hello, world!", style = NxTheme.typography.bodyLarge
                     )
                 }
             }
@@ -164,9 +160,6 @@ private fun NxAppbarDarkPreview() {
                         modifier = Modifier
                             .fillMaxHeight()
                             .aspectRatio(1f),
-                        colors = IconButtonDefaults.iconButtonColors(
-                            containerColor = Color.Transparent
-                        )
                     ) {
                         NxIcon(
                             icon = NxIcons.Settings,
@@ -179,9 +172,7 @@ private fun NxAppbarDarkPreview() {
                     modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "Hello, world!",
-                        color = NxTheme.colors.text,
-                        style = NxTheme.typography.bodyLarge
+                        text = "Hello, world!", style = NxTheme.typography.bodyLarge
                     )
                 }
             }

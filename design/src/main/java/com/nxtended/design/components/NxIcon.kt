@@ -31,7 +31,7 @@ fun NxIcon(
     val actualTint = when {
         selected -> NxTheme.colors.primary
         tint != null -> tint
-        else -> NxTheme.colors.text
+        else -> NxTheme.colors.onBackground
     }
 
     Icon(
@@ -46,7 +46,7 @@ fun NxIcon(
 @Composable
 private fun LightThemeIconPreview() {
     NxTheme {
-        Surface(color = NxTheme.colors.background) {
+        Surface {
             Row(
                 modifier = Modifier.padding(NxDimensions.MD),
                 horizontalArrangement = Arrangement.spacedBy(NxDimensions.SM)
@@ -64,7 +64,7 @@ private fun LightThemeIconPreview() {
 @Composable
 private fun DarkThemeIconPreview() {
     NxTheme(darkTheme = true) {
-        Surface(color = NxTheme.colors.background) {
+        Surface {
             Row(
                 modifier = Modifier.padding(NxDimensions.MD),
                 horizontalArrangement = Arrangement.spacedBy(NxDimensions.SM)

@@ -31,16 +31,22 @@ fun NxRadio(
     onChanged: ((Boolean) -> Unit)? = null,
     enabled: Boolean = true,
 ) {
-    val borderColor = if (enabled) {
-        if (value) NxTheme.colors.text else NxTheme.colors.text.copy(alpha = 0.4f)
-    } else NxTheme.colors.inactive
+    val borderColor = when {
+        value -> Color.Transparent
+        enabled -> NxTheme.colors.onBackground
+        else -> NxTheme.colors.onBackground.copy(alpha = 0.25f)
+    }
 
-    val fillColor = if (value) {
-        if (enabled) NxTheme.colors.text else NxTheme.colors.inactive
-    } else Color.Transparent
+    val fillColor = when {
+        !value -> Color.Transparent
+        enabled -> NxTheme.colors.onBackground
+        else -> NxTheme.colors.onBackground.copy(alpha = 0.25f)
+    }
 
-    val dotColor = if (enabled) NxTheme.colors.background
-    else NxTheme.colors.background.copy(alpha = 0.5f)
+    val dotColor = when {
+        enabled -> NxTheme.colors.background
+        else -> NxTheme.colors.background.copy(alpha = 0.5f)
+    }
 
 
     Button(

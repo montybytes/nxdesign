@@ -41,8 +41,7 @@ fun NxAlertDialog(
         Surface(
             modifier = Modifier.fillMaxWidth(),
             shape = NxShapes.Card,
-            color = NxTheme.colors.card,
-            tonalElevation = 0.dp,
+            color = NxTheme.colors.surfaceContainer,
         ) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -63,7 +62,7 @@ fun NxAlertDialog(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
                         style = NxTheme.typography.titleLarge,
-                        color = NxTheme.colors.text,
+                        color = NxTheme.colors.onSurface,
                     )
 
                     Text(
@@ -71,7 +70,7 @@ fun NxAlertDialog(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
                         style = NxTheme.typography.bodyMedium,
-                        color = NxTheme.colors.text,
+                        color = NxTheme.colors.onSurface,
                     )
                 }
 
@@ -86,8 +85,8 @@ fun NxAlertDialog(
                             .fillMaxWidth()
                             .height(56.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = NxTheme.colors.listItem,
-                            contentColor = if (isWarning) NxColors.NothingRed else NxTheme.colors.text
+                            containerColor = NxTheme.colors.tertiary,
+                            contentColor = if (isWarning) NxColors.NothingRed else NxTheme.colors.onTertiary
                         )
                     ) {
                         Text(confirmText)
@@ -100,8 +99,8 @@ fun NxAlertDialog(
                             .fillMaxWidth()
                             .height(56.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = NxTheme.colors.listItem,
-                            contentColor = NxTheme.colors.text
+                            containerColor = NxTheme.colors.tertiary,
+                            contentColor = NxTheme.colors.onTertiary
                         )
                     ) {
                         Text(cancelText)

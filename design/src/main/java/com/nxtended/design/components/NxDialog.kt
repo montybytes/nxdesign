@@ -36,7 +36,7 @@ fun NxDialog(
         Surface(
             modifier = Modifier.fillMaxWidth(),
             shape = NxShapes.Card,
-            color = NxTheme.colors.card,
+            color = NxTheme.colors.surfaceContainer,
             tonalElevation = 0.dp,
         ) {
             Column(
@@ -69,7 +69,8 @@ private fun DialogPreview() {
                     .fillMaxWidth()
                     .height(56.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = NxTheme.colors.listItem, contentColor = NxTheme.colors.text
+                    containerColor = NxTheme.colors.tertiary,
+                    contentColor = NxTheme.colors.onTertiary
                 )
             ) {
                 Text("Sample Button")
